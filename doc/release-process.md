@@ -5,6 +5,8 @@ Before every release candidate:
 
 * Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#synchronising-translations).
 
+* Update manpages, see [gen-manpages.sh](https://github.com/bitcoin/bitcoin/blob/master/contrib/devtools/README.md#gen-manpagessh).
+
 Before every minor and major release:
 
 * Update [bips.md](bips.md) to account for changes since the last release.
@@ -137,9 +139,10 @@ Build output expected:
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
-Add other gitian builders keys to your gpg keyring
+Add other gitian builders keys to your gpg keyring, and/or refresh keys.
 
     gpg --import bitcoin/contrib/gitian-keys/*.pgp
+    gpg --refresh-keys
 
 Verify the signatures
 

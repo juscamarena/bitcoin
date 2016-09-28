@@ -5,12 +5,10 @@
 
 # Test for -rpcbind, as well as -rpcallowip and -rpcconnect
 
-import tempfile
-import traceback
-
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 from test_framework.netutil import *
+
 
 class RPCBindTest(BitcoinTestFramework):
 
@@ -46,7 +44,7 @@ class RPCBindTest(BitcoinTestFramework):
 
     def run_allowip_test(self, allow_ips, rpchost, rpcport):
         '''
-        Start a node with rpcwallow IP, and request getinfo
+        Start a node with rpcallow IP, and request getnetworkinfo
         at a non-localhost IP.
         '''
         base_args = ['-disablewallet', '-nolisten'] + ['-rpcallowip='+x for x in allow_ips]
@@ -54,7 +52,7 @@ class RPCBindTest(BitcoinTestFramework):
         try:
             # connect to node through non-loopback interface
             node = get_rpc_proxy(rpc_url(0, "%s:%d" % (rpchost, rpcport)), 0)
-            node.getinfo()
+            node.getnetworkinfo()
         finally:
             node = None # make sure connection will be garbage collected and closed
             stop_nodes(self.nodes)
@@ -109,4 +107,4 @@ class RPCBindTest(BitcoinTestFramework):
             pass
 
 if __name__ == '__main__':
-    RPCBindTest ().main ()
+    RPCBindTest().main()
